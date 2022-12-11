@@ -1,4 +1,4 @@
-package ataque;
+package Ataque;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class Main {
+public class Ataque {
 
     // {'e', 't', 'a', 'o', 'i'};
     static final char[] EN_LETTER_FREQUENCY = new char[] {'E', 'T', 'A', 'O', 'I'};

@@ -1,37 +1,40 @@
-package cifrador;
+package Decifrador;
 
 import java.util.Scanner;
 
-public class Main {
+public class Decifrador {
 
-    private static String plainText, key, keyStream, cipherText;
+    private static String plainText, key, keyStream, cipherText="";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter plain text:");
-        plainText = scanner.nextLine();
+        System.out.println("Enter ciphered text:");
+        String nextLine = "a";
+        while (nextLine.length() > 0) {
+            nextLine = scanner.nextLine();
+            cipherText += nextLine;
+        }
         System.out.println("Enter key:");
         key = scanner.nextLine();
-        keyStream = extendKey(key, plainText);
-        System.out.println(keyStream);
-        cipherText = cipherText(plainText, keyStream);
-        System.out.println(cipherText);
+        keyStream = extendKey(key, cipherText);
+        plainText = decipherText(cipherText, keyStream);
+        System.out.println(plainText);
     }
 
-    private static String extendKey(String key, String plainText) {
+    private static String extendKey(String key, String text) {
         StringBuilder extendedKey = new StringBuilder();
 
-        for (int i = 0; i < plainText.replaceAll("[^a-zA-Z]", "").length(); i++)
+        for (int i = 0; i < text.replaceAll("[^a-zA-Z]", "").length(); i++)
             extendedKey.append(key.charAt(i % key.length()));
 
-        for (int i = 0; i < plainText.length(); i++)
-            if (plainText.charAt(i) < 65)
+        for (int i = 0; i < text.length(); i++)
+            if (text.charAt(i) < 65)
                 extendedKey.insert(i, ' ');
 
         return String.valueOf(extendedKey);
     }
 
-    private static String cipherText(String text, String key) {
+    private static String decipherText(String text, String key) {
         StringBuilder cipheredText = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             if (text.charAt(i) < 65) {
@@ -41,11 +44,11 @@ public class Main {
 
             char pTextIndex = getCharIndex(text.charAt(i));
             char keyIndex = getCharIndex(key.charAt(i));
-            int cipheredIndex = (pTextIndex + keyIndex) % 26;
+            int decipheredIndex = ((26 - keyIndex) + pTextIndex) % 26;
             if (text.charAt(i) > 90)
-                cipheredText.append((char) (cipheredIndex + 97));
+                cipheredText.append((char) (decipheredIndex + 97));
             else
-                cipheredText.append((char) (cipheredIndex + 65));
+                cipheredText.append((char) (decipheredIndex + 65));
         }
         return String.valueOf(cipheredText);
     }
