@@ -24,6 +24,11 @@ javac <programa>\<programa>.java
 
 ## ☕ Executando o Programa desejado <Cifrador | Decifrador | Ataque>:
 
+Obs: Os programas pedem a entrada de texto pelo cmd, e precisa apertar ´ENTER´ duas vezes para finalizar a entrada do texto.
+
+
 ```
 java <programa>.<programa>
 ```
+
+
